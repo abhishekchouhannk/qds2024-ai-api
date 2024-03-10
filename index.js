@@ -102,9 +102,17 @@ app.post('/send-message', async (req, res) => {
   }
 });
 
+let processing_reorder = false; // State variable to track processing status
+
 // Route to handle reordering tasks
 app.post('/reorder-tasks', async (req, res) => {
   try {
+
+		if(processing) {
+			return res.status(200).json({message: 'Please wait'});
+		}
+
+		processing_reorder = true;
     // Extract tasksArray from the request body
     const { tasksArray } = req.body;
 
@@ -125,7 +133,9 @@ app.post('/reorder-tasks', async (req, res) => {
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'An error occurred while reordering tasks.' });
-  }
+  } finally {
+		processing_reorder = false;
+	}
 });
 
 // Define a route to handle file uploads
@@ -218,17 +228,21 @@ class ApiInterface {
 	}
 
 	async reorderTasks(tasksArray) {
+		// const instructions = `
+		// Based on all the information provided for all the tasks,
+		// weigh each option against each other for all tasks
+		// pecentageWorth of each task
+		// dueDate of each task
+		
+		// to determine which task the user should work on next
+		
+		// IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data, and the tasks order in descending order of importance, 
+		// the most important task is the very first in the list and 
+		// the least important is at the very bottom of the array`
+
 		const instructions = `
-		Based on all the information provided for all the tasks,
-		weigh each option against each other for all tasks
-		pecentageWorth of each task
-		dueDate of each task
-		
-		to determine which task the user should work on next
-		
-		IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data, and the tasks order in descending order of importance, 
-		the most important task is the very first in the list and 
-		the least important is at the very bottom of the array`
+			Send an json array with objects.
+		`
 
 // 		const instructions = `
 // 		This prompt is designed to reorder a list of tasks based on their priority. Each task is represented as an object within an array, with the following properties:
