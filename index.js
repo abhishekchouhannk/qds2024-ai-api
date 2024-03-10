@@ -247,7 +247,9 @@ class ApiInterface {
 
 			Your task is to rearrange the tasks array such that tasks are ordered in descending order of priority, with the most important task appearing first in the list.
 
-			Please reorder the tasks array accordingly and return the modified array (with the original data) as the output.
+			Please reorder the tasks array accordingly and return the modified array (with the original data) as the output
+			
+			RETURN THE REORDERED ARRAY ACCORDING TO PRIORITY.
 `
 
 		const prompt = tasksArray;
