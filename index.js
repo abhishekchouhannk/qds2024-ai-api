@@ -231,16 +231,17 @@ class ApiInterface {
 
 		const prompt = tasksArray;
 
+		console.log
 		console.log(tasksArray);
 
-		console.log();
+		console.log("triggered");
 
 		const modelObj = this.setupModelDetails(instructions, prompt)
 
 		try {
 			const response = await this.openai.chat.completions.create(modelObj);
 
-			// console.log(response);
+			console.log(response);
 
 			console.log(response.choices[0].message.content)
 
