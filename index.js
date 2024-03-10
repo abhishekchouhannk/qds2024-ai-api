@@ -66,9 +66,10 @@ app.post('/upload-link', async (req, res) => {
 app.post('/send-message', async (req, res) => {
   try {
     // Extract previousHistory and newMessage from the request body
-    const { previousHistory, newMessage } = req.body;
+    const obj = req.body;
 
-		console.log(previousHistory);
+		console.log(obj.messages);
+		console.log(obj.newMessage);
 
     // Check if previousHistory and newMessage are provided
     if (!Array.isArray(previousHistory)) {
