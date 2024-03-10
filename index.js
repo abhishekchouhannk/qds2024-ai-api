@@ -6,14 +6,6 @@ const PDFParser = require('pdf-parse'); // Import pdf-parse
 const OpenAI = require("openai");
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-// const bodyParser = require('body-parser'); // Middleware for parsing JSON request body
-// const { promisify } = require('util');
-// const { TextDecoder } = require('util');
-
-
-// import classes
-// const { ApiInterface } = require("./apiInterface");
-// const { Chatbot } = require("./chatbot.js");
 
 const app = express();
 const upload = multer(); // Don't specify a destination directory
@@ -118,11 +110,6 @@ app.post('/reorder-tasks', async (req, res) => {
 		console.log(req)
 
 		const apiInterface = new ApiInterface();
-
-    // Check if tasksArray is provided and is an array
-    // if (!Array.isArray(tasksArray)) {
-    //   return res.status(400).json({ error: 'Invalid request body. "tasksArray" should be an array.' });
-    // }
 
     // Call reorderTasks function from ApiInterface
     const reorderedTasks = await apiInterface.reorderTasks(tasksArray);
@@ -229,17 +216,26 @@ class ApiInterface {
 	}
 
 	async reorderTasks(tasksArray) {
+
+		const currentDate = new Date();
+
+		// Format the date string in ISO format (e.g., "2024-03-10T12:30:45.678Z")
+		const currentDateTimeString = currentDate.toISOString();
+
 		const instructions = `
 		Based on all the information provided for all the tasks,
-		weigh each option against each other for all tasks
-		pecentageWorth of each task
-		dueDate of each task
+		weigh each option against each other
+		the factors to consider are dueDate and percentWorth, 
+		if the dueDate is closer to the current date, it should be placed higher in priority
+		also if an assignment is worth a more percent-wise it should be higher in priority as well
+		Compare these two factors for each task in the array (each object is one task) to determine the order.
+		REMEMBER tasks with more priority are put first in the array and then in descending order of priority.
+
+		CurrentDate: ${currentDateTimeString}.
 		
-		to determine which task the user should work on next
-		
-		IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data, and the tasks order in descending order of importance, 
-		the most important task is the very first in the list and 
-		the least important is at the very bottom of the array`
+		IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data.
+		The most important task is the very first in the list and 
+		The least important is at the very bottom of the array`
 
 // 		const instructions = `
 // 		This prompt is designed to reorder a list of tasks based on their priority. Each task is represented as an object within an array, with the following properties:
@@ -264,21 +260,14 @@ class ApiInterface {
 // 			RETURN THE REORDERED ARRAY ACCORDING TO PRIORITY.
 // `
 
-		// console.log(tasksArray);
-
 		const prompt = JSON.stringify(tasksArray);
 
 		console.log(prompt);
-
-		// console.log("triggered");
 
 		const modelObj = this.setupModelDetails(instructions, prompt)
 
 		try {
 			const response = await this.openai.chat.completions.create(modelObj);
-
-			// console.log(response);
-
 			console.log(response.choices[0].message.content)
 			return JSON.parse(response.choices[0].message.content);
 		} catch(error) {
