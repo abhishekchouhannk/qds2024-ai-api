@@ -240,7 +240,11 @@ class ApiInterface {
 		try {
 			const response = await this.openai.chat.completions.create(modelObj);
 
-			console.log(response);
+			// console.log(response);
+
+			console.log(response.choices[0].message.content)
+
+
 
 			return JSON.parse(response.choices[0].message.content);
 		} catch(error) {
