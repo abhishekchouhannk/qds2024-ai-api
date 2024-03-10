@@ -229,21 +229,17 @@ class ApiInterface {
 	}
 
 	async reorderTasks(tasksArray) {
-		// const instructions = `
-		// Based on all the information provided for all the tasks,
-		// weigh each option against each other for all tasks
-		// pecentageWorth of each task
-		// dueDate of each task
-		
-		// to determine which task the user should work on next
-		
-		// IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data, and the tasks order in descending order of importance, 
-		// the most important task is the very first in the list and 
-		// the least important is at the very bottom of the array`
-
 		const instructions = `
-			Send an json array with objects.
-		`
+		Based on all the information provided for all the tasks,
+		weigh each option against each other for all tasks
+		pecentageWorth of each task
+		dueDate of each task
+		
+		to determine which task the user should work on next
+		
+		IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data, and the tasks order in descending order of importance, 
+		the most important task is the very first in the list and 
+		the least important is at the very bottom of the array`
 
 // 		const instructions = `
 // 		This prompt is designed to reorder a list of tasks based on their priority. Each task is represented as an object within an array, with the following properties:
@@ -268,13 +264,13 @@ class ApiInterface {
 // 			RETURN THE REORDERED ARRAY ACCORDING TO PRIORITY.
 // `
 
-		console.log(tasksArray);
+		// console.log(tasksArray);
 
 		const prompt = JSON.stringify(tasksArray);
 
 		console.log(prompt);
 
-		console.log("triggered");
+		// console.log("triggered");
 
 		const modelObj = this.setupModelDetails(instructions, prompt)
 
