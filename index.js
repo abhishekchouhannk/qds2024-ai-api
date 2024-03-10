@@ -163,7 +163,7 @@ class Chatbot {
 		const modelDetails = {
 			model: 'gpt-3.5-turbo-0125',
 			messages: [{"role": "user", "content": `INSTRUCTIONS TO BE FOLLOWED: ${instructions} PROMPT: ${prompt}`}],
-			temperature: 0.5,
+			temperature: 0,
 			max_tokens: 1024
 		};
 
@@ -209,7 +209,7 @@ class ApiInterface {
 		const modelDetails = {
 			model: 'gpt-3.5-turbo-0125',
 			messages: [{"role": "user", "content": `INSTRUCTIONS TO BE FOLLOWED: ${instructions} PROMPT: ${prompt}`}],
-			temperature: 0,
+			temperature: 0.7,
 			max_tokens: 1024
 		};
 
