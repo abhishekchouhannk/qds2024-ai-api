@@ -24,7 +24,7 @@ app.use(express.json());
 // Define custom CORS options to allow preflight requests
 const corsOptions = {
   origin: '*', // Allow requests from any origin
-  methods: ['GET', 'POST'], // Allow only GET and POST requests
+  methods: ['GET', 'POST', 'OPTIONS'], // Allow only GET and POST requests
   allowedHeaders: ['Content-Type'], // Allow only the Content-Type header
 };
 
