@@ -65,14 +65,14 @@ app.post('/upload-link', async (req, res) => {
 // Define a route to handle sending messages
 app.post('/send-message', async (req, res) => {
   try {
-    // Extract previousHistory and newMessage from the request body
-    const obj = req.body;
+    // Parse the request body if it's not already parsed
+  const requestBody = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
 
-		console.log(obj.messages);
-		console.log(obj.newMessage);
+  // Access the messages array and userMessage string
+  const { messages, newMessage } = requestBody;
 
     // Check if previousHistory and newMessage are provided
-    if (!Array.isArray(previousHistory)) {
+    if (!Array.isArray(messages)) {
       return res.status(400).send('Invalid request body. "previousHistory" should be an array of objects');
     }
 
@@ -82,7 +82,7 @@ app.post('/send-message', async (req, res) => {
 
 		const chatbot = new Chatbot();
 
-		let response = await chatbot.sendMessage(previousHistory, "", newMessage);
+		let response = await chatbot.sendMessage(messages, "", newMessage);
 
 		// if (file) {
 		// 	// Send message using the Chatbot class
