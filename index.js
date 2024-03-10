@@ -111,9 +111,9 @@ app.post('/reorder-tasks', async (req, res) => {
 		const apiInterface = new ApiInterface();
 
     // Check if tasksArray is provided and is an array
-    if (!Array.isArray(tasksArray)) {
-      return res.status(400).json({ error: 'Invalid request body. "tasksArray" should be an array.' });
-    }
+    // if (!Array.isArray(tasksArray)) {
+    //   return res.status(400).json({ error: 'Invalid request body. "tasksArray" should be an array.' });
+    // }
 
     // Call reorderTasks function from ApiInterface
     const reorderedTasks = await apiInterface.reorderTasks(tasksArray);
