@@ -21,7 +21,15 @@ const upload = multer(); // Don't specify a destination directory
 // Parse JSON request bodies
 app.use(express.json());
 
-app.use(cors({origin:true,credentials: true}));
+// Define custom CORS options to allow preflight requests
+const corsOptions = {
+  origin: '*', // Allow requests from any origin
+  methods: ['GET', 'POST'], // Allow only GET and POST requests
+  allowedHeaders: ['Content-Type'], // Allow only the Content-Type header
+};
+
+// Use the cors middleware with custom options
+app.use(cors(corsOptions));
 
 // In-memory storage for file data
 let file = {};
