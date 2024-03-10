@@ -68,6 +68,8 @@ app.post('/send-message', async (req, res) => {
     // Extract previousHistory and newMessage from the request body
     const { previousHistory, newMessage } = req.body;
 
+		console.log(previousHistory);
+
     // Check if previousHistory and newMessage are provided
     if (!Array.isArray(previousHistory)) {
       return res.status(400).send('Invalid request body. "previousHistory" should be an array of objects');
