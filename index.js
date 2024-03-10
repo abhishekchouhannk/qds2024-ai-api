@@ -225,7 +225,7 @@ class ApiInterface {
 		
 		to determine which task the user should work on next
 		
-		IMPORTANT: Give back JUST an array of these objects reordered with the tasks reordered, and the tasks order in descending order of importance, 
+		IMPORTANT: Give back JUST an ARRAY with the tasks reordered, and the tasks order in descending order of importance, 
 		the most important task is the very first in the list and 
 		the least important is at the very bottom of the array`
 
@@ -241,7 +241,7 @@ class ApiInterface {
 		try {
 			const response = await this.openai.chat.completions.create(modelObj);
 
-			console.log(response);
+			// console.log(response);
 
 			console.log(response.choices[0].message.content)
 
