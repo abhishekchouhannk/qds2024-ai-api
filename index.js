@@ -76,9 +76,11 @@ app.post('/send-message', async (req, res) => {
       return res.status(400).send('Invalid request body. "previousHistory" should be an array of objects');
     }
 
-		if (newMessage !== String) {
-			return res.status(400).send('and "newMessage" should be a string.');
-		}
+		console.log(newMessage);
+
+		// if (newMessage !== String) {
+		// 	return res.status(400).send('and "newMessage" should be a string.');
+		// }
 
 		const chatbot = new Chatbot();
 
