@@ -229,7 +229,7 @@ class ApiInterface {
 		the most important task is the very first in the list and 
 		the least important is at the very bottom of the array`
 
-		const prompt = JSON.stringify(tasksArray);
+		const prompt = tasksArray;
 
 		const modelObj = this.setupModelDetails(instructions, prompt)
 
