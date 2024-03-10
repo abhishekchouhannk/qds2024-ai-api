@@ -252,6 +252,8 @@ class ApiInterface {
 // 			RETURN THE REORDERED ARRAY ACCORDING TO PRIORITY.
 // `
 
+		console.log(tasksArray);
+
 		const prompt = JSON.stringify(tasksArray);
 
 		console.log(prompt);
