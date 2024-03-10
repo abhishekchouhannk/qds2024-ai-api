@@ -206,6 +206,7 @@ class ApiInterface {
 	}
 
 	setupModelDetails(instructions, prompt) {
+		console.log(prompt);
 		const modelDetails = {
 			model: 'gpt-3.5-turbo-0125',
 			messages: [{"role": "user", "content": `INSTRUCTIONS TO BE FOLLOWED: ${instructions} PROMPT: ${prompt}`}],
