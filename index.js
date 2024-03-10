@@ -87,14 +87,14 @@ app.post('/send-message', async (req, res) => {
 
 		const chatbot = new Chatbot();
 
-		let response = await chatbot.sendMessage(messages, "", userMessage);
+		// let response = await chatbot.sendMessage(messages, "", userMessage);
 
-		// if (file) {
-		// 	// Send message using the Chatbot class
-		// 	response = await chatbot.sendMessage(previousHistory, file.content, newMessage);
-		// } else {
-		// 	return res.status(500).send('Error occurred, please upload link to file for context');
-		// }
+		if (file) {
+			// Send message using the Chatbot class
+			response = await chatbot.sendMessage(previousHistory, file.content, newMessage);
+		} else {
+			response = await chatbot.sendMessage(previousHistory, "", newMessage);
+		}
 
 		console.log(response)
 
