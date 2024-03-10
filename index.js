@@ -42,10 +42,10 @@ app.post('/upload-link', async (req, res) => {
 
     // Parse the text content if it's a PDF file
     let parsedContent = fileContent;
-    if (link.endsWith('.pdf')) {
-      const pdfData = await PDFParser(fileContent);
-      parsedContent = pdfData.text;
-    }
+    // if (link.endsWith('.pdf')) {
+    //   const pdfData = await PDFParser(fileContent);
+    //   parsedContent = pdfData.text;
+    // }
 
     // Store the file data in memory
     file = {
