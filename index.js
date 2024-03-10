@@ -108,7 +108,7 @@ let processing_reorder = false; // State variable to track processing status
 app.post('/reorder-tasks', async (req, res) => {
   try {
 
-		if(processing) {
+		if(processing_reorder) {
 			return res.status(200).json({message: 'Please wait'});
 		}
 
