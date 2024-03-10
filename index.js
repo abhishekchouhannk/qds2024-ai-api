@@ -69,20 +69,24 @@ app.post('/send-message', async (req, res) => {
     const { previousHistory, newMessage } = req.body;
 
     // Check if previousHistory and newMessage are provided
-    if (!Array.isArray(previousHistory) || typeof newMessage !== 'string') {
-      return res.status(400).send('Invalid request body. "previousHistory" should be an array of objects and "newMessage" should be a string.');
+    if (!Array.isArray(previousHistory)) {
+      return res.status(400).send('Invalid request body. "previousHistory" should be an array of objects');
     }
+
+		if (newMessage !== String) {
+			return res.status(400).send('and "newMessage" should be a string.');
+		}
 
 		const chatbot = new Chatbot();
 
-		let response = null;
+		let response = await chatbot.sendMessage(previousHistory, "", newMessage);
 
-		if (file) {
-			// Send message using the Chatbot class
-			response = await chatbot.sendMessage(previousHistory, file.content, newMessage);
-		} else {
-			return res.status(500).send('Error occurred, please upload link to file for context');
-		}
+		// if (file) {
+		// 	// Send message using the Chatbot class
+		// 	response = await chatbot.sendMessage(previousHistory, file.content, newMessage);
+		// } else {
+		// 	return res.status(500).send('Error occurred, please upload link to file for context');
+		// }
 
 		console.log(response)
 
@@ -173,15 +177,15 @@ class Chatbot {
 		INSTRUCTIONS: 
 		This is a chatbot implementation providing data being talked about and previous chat messages as context.
 
-		DATA being asked about:
+		DATA being asked about [if no data is provided, ignore data and continue chatting with context]:
 		${pdfContent}
 
 		Following is the previous chat history arranged in order, use this as context
 
 		${JSON.stringify(previousHistory)}
 		
-		IMPORTANT: Utilize the chat history as context and answer prompt question regarding DATA,
-		and reply as if you are the chatbot in the conversation array continuing the conversation by replying to the new prompt`
+		IMPORTANT: Utilize the chat history as context and answer prompt question regarding DATA [if provided],
+		and reply as if you are the chatbot in the conversation continuing the conversation by replying to the new prompt`
 
 		const prompt = newMessage;
 
@@ -291,4 +295,70 @@ class ApiInterface {
 	//     }
 	// }
 }
+
+//  const tasksArray = [
+  //   {
+  //     title: "Lab 3: SQL Queries",
+  //     dueDate: "2023-03-16",
+  //     type: "assignment",
+  //     status: "in-progress",
+  //     course: "COMP 4537",
+  //     percentageWorth: 10
+  //   },
+  //   {
+  //     title: "Assignment 2: Data Structures",
+  //     dueDate: "2023-03-13",
+  //     type: "assignment",
+  //     status: "completed",
+  //     course: "COMP 3760",
+  //     percentageWorth: 15,
+  //   },
+  //   {
+  //     title: "Assignment 4: Ethics Report",
+  //     dueDate: "2023-04-01",
+  //     type: "assignment",
+  //     status: "in-progress",
+  //     course: "LIBS 7102",
+  //     percentageWorth: 10
+  //   },
+  //   {
+  //     title: "Midterm Exam: Object-Oriented Programming",
+  //     dueDate: "2023-04-06",
+  //     type: "exam",
+  //     status: "in-progress",
+  //     course: "COMP 3522",
+  //     percentageWorth: 10
+  //   },
+  //   {
+  //     title: "Quiz 2: Operating Systems",
+  //     dueDate: "2023-03-08",
+  //     type: "quiz",
+  //     status: "in-progress",
+  //     course: "COMP 4736",
+  //     percentageWorth: 2,
+  //   }
+  //   ]
+
+  
+
+  // useEffect(() => {
+  //   const postData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       // Make a POST request to the server with the tasks JSON array
+  //       const response = await axios.post('https://qds2024-ai-api.vercel.app/reorder-tasks', tasksArray);
+  
+  //       // Log the response from the server
+  //       console.log('Response:', response.data);
+  //       alert('Tasks sent successfully!');
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //       alert('Error sending tasks');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   postData();
+  // }, []); // Empty dependency array ensures the effect runs only once after initial render
 
