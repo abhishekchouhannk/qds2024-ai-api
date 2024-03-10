@@ -231,8 +231,7 @@ class ApiInterface {
 
 		const prompt = tasksArray;
 
-		console.log
-		console.log(tasksArray);
+		console.log(prompt);
 
 		console.log("triggered");
 
@@ -244,9 +243,6 @@ class ApiInterface {
 			// console.log(response);
 
 			console.log(response.choices[0].message.content)
-
-
-
 			return JSON.parse(response.choices[0].message.content);
 		} catch(error) {
 			console.error("Error:", error);
