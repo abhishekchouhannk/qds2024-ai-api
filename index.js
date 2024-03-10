@@ -85,15 +85,17 @@ app.post('/send-message', async (req, res) => {
 		// 	return res.status(400).send('and "newMessage" should be a string.');
 		// }
 
+		let response = null;
+
 		const chatbot = new Chatbot();
 
 		// let response = await chatbot.sendMessage(messages, "", userMessage);
 
 		if (file) {
 			// Send message using the Chatbot class
-			response = await chatbot.sendMessage(previousHistory, file.content, newMessage);
+			response = await chatbot.sendMessage(messages, file.content, userMessage);
 		} else {
-			response = await chatbot.sendMessage(previousHistory, "", newMessage);
+			response = await chatbot.sendMessage(messages, "", userMessage);
 		}
 
 		console.log(response)
