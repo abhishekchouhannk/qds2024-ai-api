@@ -29,7 +29,7 @@ let file = {};
 // Define a route to handle file uploads
 app.post('/upload-link', async (req, res) => {
 	console.log(req.body)
-  const  link  = req.body;
+  const link = req.body;
 
   if (!link) {
     return res.status(400).send('Invalid request. "link" field is required in the JSON object.');
