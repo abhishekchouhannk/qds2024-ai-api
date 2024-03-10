@@ -217,42 +217,42 @@ class ApiInterface {
 	}
 
 	async reorderTasks(tasksArray) {
-		// const instructions = `
-		// Based on all the information provided for all the tasks,
-		// weigh each option against each other for all tasks
-		// pecentageWorth of each task
-		// dueDate of each task
-		
-		// to determine which task the user should work on next
-		
-		// IMPORTANT: Give back JUST an ARRAY with the tasks reordered, and the tasks order in descending order of importance, 
-		// the most important task is the very first in the list and 
-		// the least important is at the very bottom of the array`
-
 		const instructions = `
-		This prompt is designed to reorder a list of tasks based on their priority. Each task is represented as an object within an array, with the following properties:
+		Based on all the information provided for all the tasks,
+		weigh each option against each other for all tasks
+		pecentageWorth of each task
+		dueDate of each task
+		
+		to determine which task the user should work on next
+		
+		IMPORTANT: Give back JUST an ARRAY with the tasks reordered and don't change the data, and the tasks order in descending order of importance, 
+		the most important task is the very first in the list and 
+		the least important is at the very bottom of the array`
 
-			- _id: Unique identifier for the task.
-			- creator: Information about the creator of the task.
-			- course: ID of the course related to the task.
-			- name: Name or title of the task.
-			- type: Type of the task.
-			- status: Status of the task (e.g., in_progress, completed).
-			- dueDate: Due date of the task.
-			- file: Link to any associated file for the task.
-			- description: Description or details of the task.
-			- percentageWorth: Percentage worth of the task.
+// 		const instructions = `
+// 		This prompt is designed to reorder a list of tasks based on their priority. Each task is represented as an object within an array, with the following properties:
 
-			The task array has been randomly ordered, and your goal is to reorder it based on the priority of tasks. The priority is determined by two factors: due date and percentage worth. Tasks with earlier due dates and higher percentage worth should be placed higher in the list.
+// 			- _id: Unique identifier for the task.
+// 			- creator: Information about the creator of the task.
+// 			- course: ID of the course related to the task.
+// 			- name: Name or title of the task.
+// 			- type: Type of the task.
+// 			- status: Status of the task (e.g., in_progress, completed).
+// 			- dueDate: Due date of the task.
+// 			- file: Link to any associated file for the task.
+// 			- description: Description or details of the task.
+// 			- percentageWorth: Percentage worth of the task.
 
-			Your task is to rearrange the tasks array such that tasks are ordered in descending order of priority, with the most important task appearing first in the list.
+// 			The task array has been randomly ordered, and your goal is to reorder it based on the priority of tasks. The priority is determined by two factors: due date and percentage worth. Tasks with earlier due dates and higher percentage worth should be placed higher in the list.
 
-			Please reorder the tasks array accordingly and return the modified array (with the original data) as the output
+// 			Your task is to rearrange the tasks array such that tasks are ordered in descending order of priority, with the most important task appearing first in the list.
+
+// 			Please reorder the tasks array accordingly and return the modified array (with the original data) as the output
 			
-			RETURN THE REORDERED ARRAY ACCORDING TO PRIORITY.
-`
+// 			RETURN THE REORDERED ARRAY ACCORDING TO PRIORITY.
+// `
 
-		const prompt = tasksArray;
+		const prompt = JSON.stringify(tasksArray);
 
 		console.log(prompt);
 
