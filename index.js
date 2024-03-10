@@ -115,6 +115,7 @@ app.post('/reorder-tasks', async (req, res) => {
 		processing_reorder = true;
     // Extract tasksArray from the request body
     const { tasksArray } = req.body;
+		console.log(req)
 
 		const apiInterface = new ApiInterface();
 
