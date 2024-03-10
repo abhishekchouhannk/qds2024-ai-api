@@ -6,9 +6,9 @@ const PDFParser = require('pdf-parse'); // Import pdf-parse
 const OpenAI = require("openai");
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-const bodyParser = require('body-parser'); // Middleware for parsing JSON request body
-const { promisify } = require('util');
-const { TextDecoder } = require('util');
+// const bodyParser = require('body-parser'); // Middleware for parsing JSON request body
+// const { promisify } = require('util');
+// const { TextDecoder } = require('util');
 
 
 // import classes
